@@ -386,10 +386,10 @@
         
         export const csrfFetch = async(url, options = {}) => {
             options.method ||= 'GET'
-            option.headers ||= {};
+            options.headers ||= {};
 
             if (options.method.toUpperCase() !== 'GET') {
-                options.headers['Content-Type'] = 'application.json'
+                options.headers['Content-Type'] = 'application/json'
                 options.headers['X-CSRF-Token'] = sessionStorage.getItem('X-CSRF-Token')
             }
 
