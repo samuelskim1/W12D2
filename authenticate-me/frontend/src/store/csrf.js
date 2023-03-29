@@ -1,10 +1,10 @@
-const csrfFetch = async (url, options = {}) => {
+async function csrfFetch(url, options = {}) {
     options.method ||= 'GET'
     options.headers ||= {};
 
     if (options.method.toUpperCase() !== 'GET') {
-        options.headers['X-CSRF-Token'] = sessionStorage.getItem('X-CSRF-Token')
-        options.headers['Content-Type'] = 'application/json'
+        options.headers['X-CSRF-Token'] = sessionStorage.getItem('X-CSRF-Token');
+        options.headers['Content-Type'] ||= 'application/json';
     }
 
     const res = await fetch(url, options);
@@ -14,13 +14,13 @@ const csrfFetch = async (url, options = {}) => {
 }
 
 export const restoreCSRF = async () => {
-    let res = await csrfFetch('/api/session/')
+    const res = await csrfFetch('/api/session')
     storeCSRFToken(res);
     return res;
 }
 
 export const storeCSRFToken = (res) => {
-    let token = res.headers.get('X-CSRF-Token')
+    const token = res.headers.get('X-CSRF-Token')
     if (token) sessionStorage.setItem('X-CSRF-Token', token);
 }
 
