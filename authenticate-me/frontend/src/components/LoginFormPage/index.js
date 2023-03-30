@@ -40,10 +40,7 @@ function LoginFormPage() {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-               {errors.map(error => <li key={error}>{error}</li>)} 
-            </ul>
+        <form class="login_form" onSubmit={handleSubmit}>
             <label>
                 Username or Email
                 <input
@@ -62,6 +59,9 @@ function LoginFormPage() {
                     required
                 />
             </label>
+            <ul>
+                {errors.map(error => <li key={error}>{error}</li>)}
+            </ul>
             <button type="submit">Log In</button>
         </form>
     );
